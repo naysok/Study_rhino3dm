@@ -30,3 +30,9 @@ pip-selfcheck.json
 
 # cache
 *.pyc
+
+
+
+### 3dm
+_3dm/
+!_3dm/.gitkeep
