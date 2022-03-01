@@ -2,35 +2,27 @@ import rhino3dm
 
 
 model = rhino3dm.File3dm()
-
-
 PATH = "./_3dm/00_write_3dm.3dm"
+
 
 for i in range(5):
 
     ### Define Geometry
-    pt = rhino3dm.Point(rhino3dm.Point3d(i, i, i))
+    pt = rhino3dm.Point3d(i, i, i)
+    pc = rhino3dm.PointCloud([pt])
     # print(pt)
     # print(type(pt))
-    
+
+
     ### Define UserText
-    pt.SetUserString("TEST_KEY", str(i))
-    print(pt.GetUserStrings())
-
-    model.Objects.Add(pt)
-    # model.Objects.Add(pt, at)
+    attr = rhino3dm.ObjectAttributes()
+    attr.SetUserString("TEST_KEY_0", str(i))
+    attr.SetUserString("TEST_KEY_1", "Hello World!!")
 
 
-### Check Attribute
-t0 = model.Objects
+    ### Add Object
+    model.Objects.AddPointCloud(pc, attr)
 
-for i, tt in enumerate(t0):
-    
-    if i != 0:
-        print(tt)
-        print(tt.Geometry)
-        ttt = tt.Geometry
-        print(ttt.GetUserStrings())
 
 
 model.Write(PATH, 6)
